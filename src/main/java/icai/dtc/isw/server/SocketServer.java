@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import icai.dtc.isw.configuration.PropertiesISW;
 import icai.dtc.isw.controler.CustomerControler;
+import icai.dtc.isw.controler.UsuarioControler;
 import icai.dtc.isw.domain.Customer;
 import icai.dtc.isw.message.Message;
 
@@ -68,7 +69,24 @@ public class SocketServer extends Thread {
 					mensajeOut.setSession(session);
 					objectOutputStream.writeObject(mensajeOut);
 					break;
-		    	
+				case "/registrar":
+					UsuarioControler registroControler=new UsuarioControler();
+					boolean registrado=registroControler.registrar((String) session.get("nombre"),
+							(String) session.get("correo"), (String) session.get("contrasena"));
+					mensajeOut.setContext("/registrarResponse");
+					session.put("ok",registrado);
+					mensajeOut.setSession(session);
+					objectOutputStream.writeObject(mensajeOut);
+					break;
+				case "/login":
+					UsuarioControler loginControler=new UsuarioControler();
+					String nombre=loginControler.login((String) session.get("correo"), (String) session.get("contrasena"));
+					mensajeOut.setContext("/loginResponse");
+					session.put("nombre",nombre);
+					mensajeOut.setSession(session);
+					objectOutputStream.writeObject(mensajeOut);
+					break;
+
 		    	default:
 		    		System.out.println("\nParámetro no encontrado");
 		    		break;
