@@ -3,13 +3,15 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-
 public class pantallaInicial extends JPanel implements ActionListener{
     private JVentana ventana;
+
     private JButton botonRegistrar;
     private JButton botonIniciar;
+
     private JPanel panelNorte;
     private JPanel panelSur;
+
     private Image logo;
 
     public pantallaInicial(JVentana ventana){
@@ -48,13 +50,13 @@ public class pantallaInicial extends JPanel implements ActionListener{
         panel.add(boton);
         return boton;
     }
+
     @Override
     public void actionPerformed(ActionEvent e){
-        if (e.getSource()==botonRegistrar){
-            System.out.print("Registrarse");
-        }else{
-            System.out.print("Iniciar Sesion");
+        if (e.getSource() == botonIniciar) {
+            ventana.cambiarPantalla("login");
+        }if (e.getSource() == botonRegistrar) {
+            ventana.cambiarPantalla("registro");
         }
-
     }
 }

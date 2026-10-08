@@ -1,8 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.SQLOutput;
 
-public class pantallaRegistro extends JPanel implements ActionListener{
+public class pantallaLogin extends JPanel implements ActionListener{
 
     private JVentana ventana;
 
@@ -10,15 +11,15 @@ public class pantallaRegistro extends JPanel implements ActionListener{
     private JPanel panelCentro; //para textfields
     private JPanel panelSur; //para boton continuar
 
+    private JButton olvidoContrasena;
+
     private JButton continuar;
     private JButton volver;
 
-    private JTextField nombre;
     private JTextField mail;
     private JPasswordField contrasena;
-    private JPasswordField confirmarContrasena;
 
-    public pantallaRegistro(JVentana ventana) {
+    public pantallaLogin(JVentana ventana) {
         this.ventana = ventana;
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -29,21 +30,15 @@ public class pantallaRegistro extends JPanel implements ActionListener{
         configPaneles();
 
         //campos del login
-        nombre = new JTextField(20);
-        panelCentro.add(new JLabel("Nombre:"));
-        panelCentro.add(nombre);
-
         mail = new JTextField(20);
-        panelCentro.add(new JLabel("Correo electrónico:"));
+        panelCentro.add(new JLabel("Correo electrónico"));
         panelCentro.add(mail);
 
         contrasena = new JPasswordField(20);
-        panelCentro.add(new JLabel("Contraseña:"));
+        panelCentro.add(new JLabel("Contraseña"));
         panelCentro.add(contrasena);
 
-        confirmarContrasena = new JPasswordField(20);
-        panelCentro.add(new JLabel("Confirmar contraseña:"));
-        panelCentro.add(confirmarContrasena);
+        olvidoContrasena = crearBoton("Has olvidado tu contraseña?",panelCentro);
 
         continuar = crearBoton("Continuar",panelSur);
         volver = crearBoton("Volver", panelSur);
@@ -61,13 +56,13 @@ public class pantallaRegistro extends JPanel implements ActionListener{
         panelNorte.setPreferredSize(new Dimension(390,180));
         panelNorte.setLayout(new FlowLayout(FlowLayout.CENTER,0,60));
 
-        JLabel titulo = new JLabel("REGISTRARSE");
+        JLabel titulo = new JLabel("INICIAR SESIÓN");
         titulo.setFont(new Font("Arial", Font.BOLD, 28));
         titulo.setForeground(Color.BLACK);
 
         panelNorte.add(titulo);
 
-        //panel centro - nombre, email y contraseña
+        //panel centro - mail y contraseña
         panelCentro = new JPanel();
         panelCentro.setBackground(Color.WHITE);
         panelCentro.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -91,29 +86,12 @@ public class pantallaRegistro extends JPanel implements ActionListener{
         if (e.getSource() == continuar){
             //hay que chequear que coincide mail con contraseña en BD
             //cambiariamos a pantalla principal si esta bien sino ERROR TRY AGAIN
-            comprobacionesRegistroValido();
+            System.out.println("Contunar");
         }if (e.getSource() == volver) {
             ventana.cambiarPantalla("inicial");
-        }
-    }
-
-    public boolean comprobarIgualdadContrasenas(){
-        char[] psswd1 = contrasena.getPassword();
-        char[] psswd2 = confirmarContrasena.getPassword();
-        if (psswd1 == psswd2){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean comprobacionesRegistroValido(){
-        boolean check1 =comprobarIgualdadContrasenas();
-        // añadir los checks necesarios: mail no usado antes...
-        if (check1){  //aqui comprobar todos los checks true
-            return true;
-        }else{
-            return false;
+            System.out.println("volver a inicio");
+        }if (e.getSource() == olvidoContrasena){
+            //todavia no se como gestionar esto, mandar un mail al que han escrito y que confirme desde ahi pero se nos va de las manos
         }
     }
 }

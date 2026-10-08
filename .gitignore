@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+*.class
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -41,3 +42,5 @@ build/
 ##Proyecto##
 .idea/
 properties.xml
+
+/out/
