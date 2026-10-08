@@ -86,7 +86,7 @@ public class pantallaLogin extends JPanel implements ActionListener{
         if (e.getSource() == continuar){
             //hay que chequear que coincide mail con contraseña en BD
             //cambiariamos a pantalla principal si esta bien sino ERROR TRY AGAIN
-            System.out.println("Contunar");
+            ventana.cambiarPantalla("dentro");
         }if (e.getSource() == volver) {
             ventana.cambiarPantalla("inicial");
             System.out.println("volver a inicio");

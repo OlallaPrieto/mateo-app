@@ -24,6 +24,7 @@ public class JVentana extends JFrame{
         contenedor.add(new pantallaInicial(this), "inicial");
         contenedor.add(new pantallaLogin(this), "login");
         contenedor.add(new pantallaRegistro(this), "registro");
+        contenedor.add(new pantallaDentro(this),"dentro");
 
         //mas tarde metemos la principal
         setContentPane(contenedor);
