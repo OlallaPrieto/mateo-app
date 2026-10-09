@@ -15,6 +15,7 @@ public class pantallaRegistro extends JPanel implements ActionListener{
 
     private JPanel panelNorte; //para titulo "inicio de sesion"
     private JPanel panelCentro; //para textfields
+    private JPanel formulario; //una columna: cada etiqueta encima de su campo
     private JPanel panelSur; //para boton continuar
 
     private JButton continuar;
@@ -37,20 +38,20 @@ public class pantallaRegistro extends JPanel implements ActionListener{
 
         //campos del login
         nombre = new JTextField(20);
-        panelCentro.add(new JLabel("Nombre:"));
-        panelCentro.add(nombre);
+        formulario.add(new JLabel("Nombre:"));
+        formulario.add(nombre);
 
         mail = new JTextField(20);
-        panelCentro.add(new JLabel("Correo electrónico:"));
-        panelCentro.add(mail);
+        formulario.add(new JLabel("Correo electrónico:"));
+        formulario.add(mail);
 
         contrasena = new JPasswordField(20);
-        panelCentro.add(new JLabel("Contraseña:"));
-        panelCentro.add(contrasena);
+        formulario.add(new JLabel("Contraseña:"));
+        formulario.add(contrasena);
 
         confirmarContrasena = new JPasswordField(20);
-        panelCentro.add(new JLabel("Confirmar contraseña:"));
-        panelCentro.add(confirmarContrasena);
+        formulario.add(new JLabel("Confirmar contraseña:"));
+        formulario.add(confirmarContrasena);
 
         continuar = crearBoton("Continuar",panelSur);
         volver = crearBoton("Volver", panelSur);
@@ -78,6 +79,9 @@ public class pantallaRegistro extends JPanel implements ActionListener{
         panelCentro = new JPanel();
         panelCentro.setBackground(Color.WHITE);
         panelCentro.setLayout(new FlowLayout(FlowLayout.CENTER));
+        formulario = new JPanel(new GridLayout(0,1,0,4));
+        formulario.setBackground(Color.WHITE);
+        panelCentro.add(formulario);
 
         //panel sur - continuar o volver
         panelSur=new JPanel();
@@ -117,12 +121,12 @@ public class pantallaRegistro extends JPanel implements ActionListener{
         return contrasenasIguales(psswd1, psswd2);
     }
 
-    // con == se comparan los objetos, no el texto: hay que usar Arrays.equals
+    //con == se comparan los objetos, no el texto: hay que usar Arrays.equals
     public static boolean contrasenasIguales(char[] psswd1, char[] psswd2){
         return psswd1.length > 0 && Arrays.equals(psswd1, psswd2);
     }
 
-    // manda el usuario al servidor, que lo guarda en la tabla usuarios
+    //manda el usuario al servidor, que lo guarda en la tabla usuarios
     public boolean registrar(){
         Client cliente = new Client();
         HashMap<String,Object> session = new HashMap<>();

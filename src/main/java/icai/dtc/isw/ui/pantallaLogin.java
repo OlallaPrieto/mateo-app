@@ -15,6 +15,7 @@ public class pantallaLogin extends JPanel implements ActionListener{
 
     private JPanel panelNorte; //para titulo "inicio de sesion"
     private JPanel panelCentro; //para textfields
+    private JPanel formulario; //una columna: cada etiqueta encima de su campo
     private JPanel panelSur; //para boton continuar
 
     private JButton olvidoContrasena;
@@ -37,14 +38,14 @@ public class pantallaLogin extends JPanel implements ActionListener{
 
         //campos del login
         mail = new JTextField(20);
-        panelCentro.add(new JLabel("Correo electrónico"));
-        panelCentro.add(mail);
+        formulario.add(new JLabel("Correo electrónico"));
+        formulario.add(mail);
 
         contrasena = new JPasswordField(20);
-        panelCentro.add(new JLabel("Contraseña"));
-        panelCentro.add(contrasena);
+        formulario.add(new JLabel("Contraseña"));
+        formulario.add(contrasena);
 
-        olvidoContrasena = crearBoton("Has olvidado tu contraseña?",panelCentro);
+        olvidoContrasena = crearBoton("Has olvidado tu contraseña?",formulario);
 
         continuar = crearBoton("Continuar",panelSur);
         volver = crearBoton("Volver", panelSur);
@@ -72,6 +73,9 @@ public class pantallaLogin extends JPanel implements ActionListener{
         panelCentro = new JPanel();
         panelCentro.setBackground(Color.WHITE);
         panelCentro.setLayout(new FlowLayout(FlowLayout.CENTER));
+        formulario = new JPanel(new GridLayout(0,1,0,4));
+        formulario.setBackground(Color.WHITE);
+        panelCentro.add(formulario);
 
         //panel sur - continuar o volver
         panelSur=new JPanel();
@@ -104,7 +108,7 @@ public class pantallaLogin extends JPanel implements ActionListener{
         }
     }
 
-    // pregunta al servidor si existe ese correo con esa contraseña; devuelve el nombre o null
+    //pregunta al servidor si existe ese correo con esa contraseña; devuelve el nombre o null
     public String login(){
         Client cliente = new Client();
         HashMap<String,Object> session = new HashMap<>();
